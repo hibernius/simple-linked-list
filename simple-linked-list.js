@@ -1,44 +1,87 @@
-//
-// This is only a SKELETON file for the 'Simple Linked List' exercise. It's been provided as a
-// convenience to get you started writing code faster.
-//
 
 export class Element {
-  constructor() {
-   
+
+  #value;
+  
+  #next = null;
+
+  constructor(value) {
+    this.#value = value;
   }
 
   get value() {
-    throw new Error('Remove this statement and implement this function');
+    return this.#value;
   }
 
   get next() {
-    throw new Error('Remove this statement and implement this function');
+    return this.#next;
+  }
+
+  set next(value) {
+    this.#next = value;
   }
 }
 
 export class List {
-  constructor() {
-    throw new Error('Remove this statement and implement this function');
+
+  #length = 0;
+
+  #head = null;
+
+  constructor(values) {
+    if (Array.isArray(values)) {
+      this.addFromArray(values);
+    }
   }
 
   add(nextValue) {
-    throw new Error('Remove this statement and implement this function');
+    if (this.#head === null) {
+      this.#head = nextValue;
+    } else {
+      nextValue.next = this.#head;
+      this.#head = nextValue;      
+    }
+    this.#length++;
+  }
+
+  addFromArray(values) {
+    for (let i=0; i<values.length; i++) {
+      this.add(new Element(values[i]));
+    }
   }
 
   get length() {
-    throw new Error('Remove this statement and implement this function');
+    return this.#length;
   }
 
   get head() {
-    throw new Error('Remove this statement and implement this function');
+    return this.#head;
   }
 
   toArray() {
-    throw new Error('Remove this statement and implement this function');
+    let output = [];
+    let currentElement = this.#head;
+    while(currentElement) {
+      output.push(currentElement.value);
+      currentElement = currentElement.next;
+    }
+
+    return output;
   }
 
   reverse() {
-    throw new Error('Remove this statement and implement this function');
+    let previousElement = null;
+    let currentElement = this.#head;
+
+    while (currentElement) {
+      const nextElement = currentElement.next;
+      currentElement.next = previousElement;
+      previousElement = currentElement;
+      currentElement = nextElement;
+    }
+
+    this.#head = previousElement;
+
+    return this;
   }
 }
