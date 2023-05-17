@@ -43,10 +43,10 @@ export class Element {
 
   /**
    * Set the next Element.
-   * @param {*} value
+   * @param {*} element
    */
-  set next(value) {
-    this.#next = value;
+  set next(element) {
+    this.#next = element;
   }
 }
 
@@ -81,14 +81,14 @@ export class List {
 
   /**
    * Add an Element to the list.
-   * @param {Element} nextValue
+   * @param {Element} nextElement
    */
-  add(nextValue) {
+  add(nextElement) {
     if (this.#head === null) {
-      this.#head = nextValue;
+      this.#head = nextElement;
     } else {
-      nextValue.next = this.#head;
-      this.#head = nextValue;      
+      nextElement.next = this.#head;
+      this.#head = nextElement;
     }
     this.#length++;
   }
